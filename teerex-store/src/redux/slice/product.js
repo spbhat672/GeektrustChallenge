@@ -10,11 +10,10 @@ export const fetchProducts = createAsyncThunk('fetchProducts',async ()=>{
 
 
 const productSlice = createSlice({
-    name:"product",
+    name:"products",
     initialState:{
         isLoading:false,
-        data:null,
-        filteredData: null, // new state to handle filtered data
+        data:null,        
         isError:false,
     },
     extraReducers:(builder)=>{
@@ -23,8 +22,7 @@ const productSlice = createSlice({
         })
         builder.addCase(fetchProducts.fulfilled,(state,action)=>{
             state.isLoading= false;
-            state.data = action.payload;
-            state.filteredData = action.payload; // initialize filtered data with all products
+            state.data = action.payload;            
         });
         builder.addCase(fetchProducts.rejected,(state,action)=>{           
             console.log("Error",action.payload);
