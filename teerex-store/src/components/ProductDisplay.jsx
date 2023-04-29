@@ -7,7 +7,7 @@ import { Box } from "@mui/system";
 import ProductCard from "./ProductCard";
 import { message } from "antd";
 
-const ProductDisplay = () => {
+const ProductDisplay = ({ setCartCount }) => {
   const filteredProducts = useSelector(getFilteredProducts);
   const isLoading = useSelector((state) => state.products.isLoading);
 
@@ -35,7 +35,8 @@ const ProductDisplay = () => {
     cartItems.push(newItem);
 
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    message.success("Product is added to cart");
+    message.success("Product is added to Cart");
+    setCartCount(cartItems);
   };
 
   return (
@@ -52,7 +53,7 @@ const ProductDisplay = () => {
               <Grid container spacing={{ xs: 2, md: 3 }} alignItems="stretch">
                 {filteredProducts && filteredProducts.length > 0 ? (
                   filteredProducts.map((product) => (
-                    <Grid item xs={12} sm={6} md={4} lg={3} key={product._id}>
+                    <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
                       <ProductCard
                         product={product}
                         handleAddToCart={addToCart}

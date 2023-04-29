@@ -4,17 +4,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
-const Header = ({ isCheckoutPage }) => {
+const Header = ({ isCheckoutPage, cartCount }) => {
   const navigate = useNavigate();
-  const [cartCount, setCartCount] = useState(0);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    const count = !localStorage.getItem("cartItems")
-      ? 0
-      : JSON.parse(localStorage.getItem("cartItems")).length;
-    setCartCount(count);
-    console.log("Hello");
-  }, [localStorage.getItem("cartItems")]);
+    let value =
+      localStorage.getItem("cartItems") &&
+      JSON.parse(localStorage.getItem("cartItems")).length > 0
+        ? JSON.parse(localStorage.getItem("cartItems")).length
+        : 0;
+    setCount(value);
+  }, [cartCount]);
 
   return (
     <div
@@ -44,14 +45,18 @@ const Header = ({ isCheckoutPage }) => {
             <b>Products</b>
           </button>
         )}
-        <FontAwesomeIcon
-          icon={faShoppingCart}
-          color="white"
-          size="2x"
-          style={{ marginRight: "5px", cursor: "pointer" }}
-          onClick={() => navigate("/checkout")}
-        />
-        <h4 style={{ color: "white", marginRight: "5px" }}>{cartCount}</h4>
+        {!isCheckoutPage && (
+          <div className="d-flex flex-row">
+            <FontAwesomeIcon
+              icon={faShoppingCart}
+              color="white"
+              size="2x"
+              style={{ marginRight: "5px", cursor: "pointer" }}
+              onClick={() => navigate("/checkout")}
+            />
+            <h4 style={{ color: "white", marginRight: "5px" }}>{count}</h4>
+          </div>
+        )}
       </div>
     </div>
   );

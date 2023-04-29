@@ -13,6 +13,7 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const [isMobile, setIsMobile] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -25,7 +26,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <Header />
+      <Header cartCount={cartCount} />
       <div className="row" style={{ maxWidth: "100%", marginTop: "20px" }}>
         {!isMobile && (
           <div className="col-3">
@@ -60,7 +61,7 @@ const HomePage = () => {
               </button>
             )}
           </div>
-          <ProductDisplay />
+          <ProductDisplay setCartCount={setCartCount} />
           <Modal
             title="Filter the products"
             visible={isOpenModal}
