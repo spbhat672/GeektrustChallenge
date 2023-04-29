@@ -8,12 +8,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Header from "../components/Header";
 import { Modal } from "antd";
+import { SEARCH_STRING } from "../utils/constants";
+import { setFilter } from "../redux/slice/filter";
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const [isMobile, setIsMobile] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [cartCount, setCartCount] = useState(0);
+  const [searchString, setSearchString] = useState(null);
 
   useEffect(() => {
     dispatch(fetchProducts());
@@ -32,7 +35,7 @@ const HomePage = () => {
           <div className="col-3">
             <div
               style={{
-                marginTop: "50px",
+                marginTop: "70px",
                 border: "1px solid black",
                 boxSizing: "border-box",
                 width: "75%",
@@ -45,10 +48,21 @@ const HomePage = () => {
           </div>
         )}
         <div className="col-9 d-flex flex-column justify-content-center align-items-center">
-          <div className="d-flex" style={{ marginBottom: "20px" }}>
+          <div className="d-flex" style={{ marginBottom: "40px" }}>
             <div className="d-flex flex-row">
-              <input type="text"></input>
-              <button>
+              <input
+                style={{ width: "450px" }}
+                placeholder="Serach products"
+                type="text"
+                onChange={(e) => setSearchString(e.target.value)}
+              ></input>
+              <button
+                onClick={() =>
+                  dispatch(
+                    setFilter({ type: SEARCH_STRING, data: searchString })
+                  )
+                }
+              >
                 <FontAwesomeIcon icon={faSearch} />
               </button>
             </div>

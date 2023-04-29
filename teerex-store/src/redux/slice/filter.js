@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { FILTER_COLOR, FILTER_GENDER, FILTER_PRICE, FILTER_TYPE } from "../../utils/constants";
+import { FILTER_COLOR, FILTER_GENDER, FILTER_PRICE, FILTER_TYPE,SEARCH_STRING } from "../../utils/constants";
 
 const filterSlice = createSlice({
   name: "filter",
@@ -8,6 +8,7 @@ const filterSlice = createSlice({
     gender: [],
     price: [],
     type: [],
+    searchString:null,
   },
   reducers: {
     setFilter: (state, action) => {
@@ -43,6 +44,11 @@ const filterSlice = createSlice({
             state.type.push(data);
           }
           break;
+
+        case SEARCH_STRING:
+            state.searchString = data;
+            break;
+
         default:
           break;
       }

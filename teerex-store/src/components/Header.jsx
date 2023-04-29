@@ -9,12 +9,15 @@ const Header = ({ isCheckoutPage, cartCount }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    let value =
+    const cart =
       localStorage.getItem("cartItems") &&
       JSON.parse(localStorage.getItem("cartItems")).length > 0
-        ? JSON.parse(localStorage.getItem("cartItems")).length
-        : 0;
-    setCount(value);
+        ? JSON.parse(localStorage.getItem("cartItems"))
+        : [];
+    const cartQuantity = cart.reduce(function (acc, item) {
+      return acc + item.qty;
+    }, 0);
+    setCount(cartQuantity);
   }, [cartCount]);
 
   return (

@@ -4,6 +4,7 @@ export const FILTER_COLOR = 'Color';
 export const FILTER_GENDER = 'Gender';
 export const FILTER_PRICE = 'Price';
 export const FILTER_TYPE = 'Type';
+export const SEARCH_STRING = 'SearchString';
 
 export const COLOR_RED = 'Red';
 export const COLOR_BLUE = 'Blue';

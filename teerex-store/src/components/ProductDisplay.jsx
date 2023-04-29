@@ -50,10 +50,22 @@ const ProductDisplay = ({ setCartCount }) => {
                 <h4>Loading Products</h4>
               </Box>
             ) : (
-              <Grid container spacing={{ xs: 2, md: 3 }} alignItems="stretch">
+              <Grid
+                container
+                spacing={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 6 }}
+                alignItems="stretch"
+              >
                 {filteredProducts && filteredProducts.length > 0 ? (
                   filteredProducts.map((product) => (
-                    <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                      md={4}
+                      lg={3}
+                      xl={4}
+                      key={product.id}
+                    >
                       <ProductCard
                         product={product}
                         handleAddToCart={addToCart}

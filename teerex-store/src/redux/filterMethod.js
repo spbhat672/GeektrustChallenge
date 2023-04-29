@@ -6,6 +6,23 @@ export const getFilteredProducts = state => {
     if (!products) {
       return [];
     }
+
+    if(filters.searchString && filters.searchString.length>0){
+      const searchResult = products.filter((product) => {
+        const name = product.name.toLowerCase();
+        const color = product.color.toLowerCase();
+        const type = product.type.toLowerCase();
+        const search = filters.searchString.toLowerCase();
+        
+        return (
+          name.includes(search) ||
+          color.includes(search) ||
+          type.includes(search)
+        );
+      });
+
+      return searchResult;
+    }    
   
     const filterByColor = (product) =>
       filters.color.length === 0 || filters.color.includes(product.color);

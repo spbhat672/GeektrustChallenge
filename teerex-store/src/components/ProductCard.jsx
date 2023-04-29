@@ -16,7 +16,10 @@ const ProductCard = ({ product, handleAddToCart }) => {
 
   return (
     <div>
-      <Card sx={{ maxWidth: 345 }} className="card">
+      <Card
+        sx={{ maxWidth: 345, width: "300px", height: "100%" }}
+        className="card"
+      >
         <CardActionArea>
           <CardMedia component="img" height="140" image={imageURL} alt={name} />
           <CardContent style={{ textAlign: "start" }}>
