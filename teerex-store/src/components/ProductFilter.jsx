@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { setFilter, clearFilter } from "../redux/slice/filter";
 import {
@@ -21,6 +21,31 @@ import {
 
 const ProductFilter = () => {
   const dispatch = useDispatch();
+  const [colorRed, setColorRed] = useState(false);
+  const [colorBlue, setColorBlue] = useState(false);
+  const [colorGreen, setColorGreen] = useState(false);
+  const [genderMen, setGenderMen] = useState(false);
+  const [genderWomen, setGenderWomen] = useState(false);
+  const [priceTill250, setPriceTill250] = useState(false);
+  const [priceTill450, setPriceTill450] = useState(false);
+  const [priceAbove450, setPriceAbove450] = useState(false);
+  const [typePolo, setTypePolo] = useState(false);
+  const [typeHoodeie, setTypeHoodie] = useState(false);
+  const [typeBasic, setTypeBasic] = useState(false);
+
+  const clearCheckBoxes = () => {
+    setColorRed(false);
+    setColorBlue(false);
+    setColorGreen(false);
+    setGenderMen(false);
+    setGenderWomen(false);
+    setPriceTill250(false);
+    setPriceTill450(false);
+    setPriceAbove450(false);
+    setTypePolo(false);
+    setTypeHoodie(false);
+    setTypeBasic(false);
+  };
 
   return (
     <div>
@@ -32,27 +57,33 @@ const ProductFilter = () => {
         <label>
           <input
             type="checkbox"
-            onChange={() =>
-              dispatch(setFilter({ type: FILTER_COLOR, data: COLOR_RED }))
-            }
+            checked={colorRed}
+            onChange={() => {
+              dispatch(setFilter({ type: FILTER_COLOR, data: COLOR_RED }));
+              setColorRed(!colorRed);
+            }}
           />
           Red
         </label>
         <label>
           <input
             type="checkbox"
-            onChange={() =>
-              dispatch(setFilter({ type: FILTER_COLOR, data: COLOR_BLUE }))
-            }
+            checked={colorBlue}
+            onChange={() => {
+              dispatch(setFilter({ type: FILTER_COLOR, data: COLOR_BLUE }));
+              setColorBlue(!colorBlue);
+            }}
           />
           Blue
         </label>
         <label>
           <input
             type="checkbox"
-            onChange={() =>
-              dispatch(setFilter({ type: FILTER_COLOR, data: COLOR_GREEN }))
-            }
+            checked={colorGreen}
+            onChange={() => {
+              dispatch(setFilter({ type: FILTER_COLOR, data: COLOR_GREEN }));
+              setColorGreen(!colorGreen);
+            }}
           />
           Green
         </label>
@@ -65,18 +96,22 @@ const ProductFilter = () => {
         <label>
           <input
             type="checkbox"
-            onChange={() =>
-              dispatch(setFilter({ type: FILTER_GENDER, data: GENDER_MEN }))
-            }
+            checked={genderMen}
+            onChange={() => {
+              dispatch(setFilter({ type: FILTER_GENDER, data: GENDER_MEN }));
+              setGenderMen(!genderMen);
+            }}
           />
           Men
         </label>
         <label>
           <input
             type="checkbox"
-            onChange={() =>
-              dispatch(setFilter({ type: FILTER_GENDER, data: GENDER_WOMEN }))
-            }
+            checked={genderWomen}
+            onChange={() => {
+              dispatch(setFilter({ type: FILTER_GENDER, data: GENDER_WOMEN }));
+              setGenderWomen(!genderWomen);
+            }}
           />
           Women
         </label>
@@ -89,27 +124,35 @@ const ProductFilter = () => {
         <label>
           <input
             type="checkbox"
-            onChange={() =>
-              dispatch(setFilter({ type: FILTER_PRICE, data: PRICE_TILL_250 }))
-            }
+            checked={priceTill250}
+            onChange={() => {
+              dispatch(setFilter({ type: FILTER_PRICE, data: PRICE_TILL_250 }));
+              setPriceTill250(!priceTill250);
+            }}
           />
           ₹0-₹250
         </label>
         <label>
           <input
             type="checkbox"
-            onChange={() =>
-              dispatch(setFilter({ type: FILTER_PRICE, data: PRICE_TILL_450 }))
-            }
+            checked={priceTill450}
+            onChange={() => {
+              dispatch(setFilter({ type: FILTER_PRICE, data: PRICE_TILL_450 }));
+              setPriceTill450(!priceTill450);
+            }}
           />
           ₹251-₹450
         </label>
         <label>
           <input
             type="checkbox"
-            onChange={() =>
-              dispatch(setFilter({ type: FILTER_PRICE, data: PRICE_ABOVE_450 }))
-            }
+            checked={priceAbove450}
+            onChange={() => {
+              dispatch(
+                setFilter({ type: FILTER_PRICE, data: PRICE_ABOVE_450 })
+              );
+              setPriceAbove450(!priceAbove450);
+            }}
           />
           Above ₹450
         </label>
@@ -122,34 +165,43 @@ const ProductFilter = () => {
         <label>
           <input
             type="checkbox"
-            onChange={() =>
-              dispatch(setFilter({ type: FILTER_TYPE, data: TYPE_POLO }))
-            }
+            checked={typePolo}
+            onChange={() => {
+              dispatch(setFilter({ type: FILTER_TYPE, data: TYPE_POLO }));
+              setTypePolo(!typePolo);
+            }}
           />
           Polo
         </label>
         <label>
           <input
             type="checkbox"
-            onChange={() =>
-              dispatch(setFilter({ type: FILTER_TYPE, data: TYPE_HOODIE }))
-            }
+            checked={typeHoodeie}
+            onChange={() => {
+              dispatch(setFilter({ type: FILTER_TYPE, data: TYPE_HOODIE }));
+              setTypeHoodie(!typeHoodeie);
+            }}
           />
           Hoodie
         </label>
         <label>
           <input
             type="checkbox"
-            onChange={() =>
-              dispatch(setFilter({ type: FILTER_TYPE, data: TYPE_BASIC }))
-            }
+            checked={typeBasic}
+            onChange={() => {
+              dispatch(setFilter({ type: FILTER_TYPE, data: TYPE_BASIC }));
+              setTypeBasic(!typeBasic);
+            }}
           />
           Basic
         </label>
       </div>
       <button
         style={{ marginTop: "5px", borderRadius: "10px", color: "#8C52FF" }}
-        onClick={() => dispatch(clearFilter())}
+        onClick={() => {
+          dispatch(clearFilter());
+          clearCheckBoxes();
+        }}
       >
         <b>Clear Filters</b>
       </button>
